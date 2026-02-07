@@ -20,21 +20,6 @@ The data for this project is based on a retail grocery inventory dataset contain
 
 ---
 
-## Schema
-```sql
-CREATE TABLE zepto_v2 (
-    category VARCHAR(120),
-    name VARCHAR(150),
-    mrp DECIMAL(10,2),
-    discountPercent INT,
-    availableQuantity INT,
-    discountedSellingPrice DECIMAL(10,2),
-    weightInGms INT,
-    outOfStock BOOLEAN,
-    quantity INT
-);
-```
-
 ---
 
 ## Business Problems and Solutions
