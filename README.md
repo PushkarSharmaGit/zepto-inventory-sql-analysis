@@ -16,6 +16,7 @@ This project focuses on exploring and analyzing a grocery inventory dataset usin
 
 ## Dataset
 The data for this project is based on a retail grocery inventory dataset containing product-level information such as name, category, price, discount, stock quantity, and weight.
+- Dataset Link: [Zepto Inventory Dataset](https://www.kaggle.com/datasets/palvinder2006/zepto-inventory-dataset)
 
 ---
 
