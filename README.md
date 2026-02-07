@@ -1,7 +1,7 @@
 # Zepto Inventory SQL Analysis
 
 ## Overview
-This project is about exploring and analyzing a grocery inventory dataset using SQL. The main aim was to understand how real product data works such as prices, discounts, stock availability, and categories by writing practical SQL queries. Through this project I practiced cleaning data, grouping information, and finding useful insights from raw inventory data.
+This project is about exploring and analyzing a grocery inventory dataset using SQL. The aim was to understand how real product data works such as prices, discounts, stock availability, and categories by writing practical SQL queries. Through this project I practiced cleaning data, grouping information, and finding useful insights from raw inventory data.
 
 ## Objective
 Understand how products are distributed across categories  
@@ -15,61 +15,64 @@ The dataset contains product level inventory information such as Product Name, C
 
 ## Business Questions and Queries
 
--- checking total number of products  
+1. Checking total number of products  
 SELECT COUNT(*) AS total_products FROM zepto_v2;
 
--- identifying product count per category  
+2. Identifying product count per category  
 SELECT category, COUNT(*) AS product_count FROM zepto_v2 GROUP BY category ORDER BY product_count DESC;
 
--- previewing initial rows of data  
+3. Previewing initial rows of data  
 SELECT * FROM zepto_v2 LIMIT 8;
 
--- checking for missing important values  
+4. Checking for missing important values  
 SELECT * FROM zepto_v2 WHERE name IS NULL OR mrp IS NULL OR category IS NULL;
 
--- identifying all unique categories  
+5. Identifying all unique categories  
 SELECT DISTINCT category FROM zepto_v2 ORDER BY category;
 
--- checking stock availability distribution  
+6. Checking stock availability distribution  
 SELECT outOfStock, COUNT(*) AS item_count FROM zepto_v2 GROUP BY outOfStock;
 
--- identifying the most expensive products  
+7. Identifying products with invalid prices  
+SELECT * FROM zepto_v2 WHERE mrp <= 0 OR discountedSellingPrice <= 0;
+
+8. Identifying the most expensive products  
 SELECT name, mrp FROM zepto_v2 ORDER BY mrp DESC LIMIT 10;
 
--- calculating average selling price per category  
+9. Calculating average selling price per category  
 SELECT category, ROUND(AVG(discountedSellingPrice),2) AS avg_selling_price FROM zepto_v2 GROUP BY category ORDER BY avg_selling_price DESC;
 
--- identifying products with very high discounts  
+10. Identifying products with very high discounts  
 SELECT name, discountPercent FROM zepto_v2 WHERE discountPercent > 50 ORDER BY discountPercent DESC;
 
--- checking products with highest stock quantity  
+11. Checking products with highest stock quantity  
 SELECT name, availableQuantity FROM zepto_v2 ORDER BY availableQuantity DESC LIMIT 10;
 
--- identifying cheapest products in each category  
+12. Identifying cheapest products in each category  
 SELECT category, MIN(discountedSellingPrice) AS cheapest_item FROM zepto_v2 GROUP BY category;
 
--- calculating value for money using price per gram  
+13. Calculating value for money using price per gram  
 SELECT name, ROUND(discountedSellingPrice / NULLIF(weightInGms,0), 3) AS price_per_gram FROM zepto_v2 ORDER BY price_per_gram ASC LIMIT 15;
 
--- categorizing products based on weight range  
+14. Categorizing products based on weight range  
 SELECT name, CASE WHEN weightInGms < 500 THEN 'Small Pack' WHEN weightInGms < 2000 THEN 'Medium Pack' ELSE 'Large Pack' END AS pack_type FROM zepto_v2;
 
--- estimating total stock value per category  
+15. Estimating total stock value per category  
 SELECT category, SUM(discountedSellingPrice * availableQuantity) AS stock_value FROM zepto_v2 GROUP BY category ORDER BY stock_value DESC;
 
--- Row number of products within each category based on price  
+16. Row number of products within each category based on price  
 SELECT category, name, mrp, ROW_NUMBER() OVER (PARTITION BY category ORDER BY mrp DESC) AS price_position FROM zepto_v2;
 
--- Rank products by MRP highest price first  
+17. Rank products by MRP highest price first  
 SELECT name, mrp, RANK() OVER (ORDER BY mrp DESC) AS price_rank FROM zepto_v2;
 
--- Dense rank products by discount percentage  
+18. Dense rank products by discount percentage  
 SELECT name, discountPercent, DENSE_RANK() OVER (ORDER BY discountPercent DESC) AS discount_rank FROM zepto_v2;
 
--- Running total of available quantity within each category  
+19. Running total of available quantity within each category  
 SELECT category, name, weightInGms, availableQuantity, SUM(availableQuantity) OVER (PARTITION BY category ORDER BY weightInGms) AS running_quantity FROM zepto_v2;
 
--- Total stock quantity within each category  
+20. Total stock quantity within each category  
 SELECT category, name, availableQuantity, SUM(availableQuantity) OVER (PARTITION BY category) AS total_category_quantity FROM zepto_v2;
 
 ## Conclusion
