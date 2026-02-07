@@ -99,7 +99,7 @@ SELECT category,
 FROM zepto_v2
 GROUP BY category;
 
--- calculating value for money using price per gram (safe division)
+-- calculating value for money using price per gram
 SELECT name,
        ROUND(discountedSellingPrice / NULLIF(weightInGms, 0), 3) AS price_per_gram
 FROM zepto_v2
