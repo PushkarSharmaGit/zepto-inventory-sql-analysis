@@ -20,8 +20,6 @@ The data for this project is based on a retail grocery inventory dataset contain
 
 ---
 
----
-
 ## Business Problems and Solutions
 
 ### 1. Count Total Number of Products
