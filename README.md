@@ -1,7 +1,7 @@
 # Zepto Inventory SQL Analysis
 
 ## Overview
-This project focuses on exploring and analyzing a grocery inventory dataset using SQL. The aim was to understand real product data such as prices, discounts, stock availability, and categories by writing practical SQL queries. This project demonstrates data exploration, data cleaning, aggregation, and analytical SQL techniques useful for beginner data analyst roles.
+This project focuses on exploring and analyzing a grocery inventory dataset using SQL. The aim was to understand real product data such as prices, discounts, stock availability, and categories by writing practical SQL queries. This project demonstrates data exploration, data cleaning, aggregation, and analytical SQL techniques.
 
 ---
 
