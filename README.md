@@ -1,19 +1,19 @@
 # Zepto Inventory SQL Analysis
 
 ## Overview
-This project focuses on exploring and analyzing a grocery inventory dataset using SQL. The goal was to understand how real product data works — prices, discounts, stock availability, and categories — by writing practical SQL queries. Through this project, I practiced cleaning data, grouping information, and extracting useful insights from raw inventory data.
+This project is about exploring and analyzing a grocery inventory dataset using SQL. The main aim was to understand how real product data works such as prices, discounts, stock availability, and categories by writing practical SQL queries. Through this project I practiced cleaning data, grouping information, and finding useful insights from raw inventory data.
 
 ## Objective
-- Understand how products are distributed across categories
-- Observe price and discount patterns
-- Analyze stock availability
-- Clean missing or incorrect data
-- Use window functions to rank and compare products
+Understand how products are distributed across categories  
+Observe price and discount patterns  
+Analyze stock availability  
+Clean missing or incorrect data  
+Use window functions to rank and compare products  
 
 ## Dataset
-The dataset contains product-level inventory information such as Product Name, Category, MRP (Price), Discount Percentage, Discounted Selling Price, Available Quantity, Product Weight (grams), and Stock Status.
+The dataset contains product level inventory information such as Product Name, Category, Price, Discount Percentage, Discounted Selling Price, Available Quantity, Product Weight in grams, and Stock Status.
 
-## Business Questions & Queries
+## Business Questions and Queries
 
 -- checking total number of products  
 SELECT COUNT(*) AS total_products FROM zepto_v2;
@@ -60,7 +60,7 @@ SELECT category, SUM(discountedSellingPrice * availableQuantity) AS stock_value 
 -- Row number of products within each category based on price  
 SELECT category, name, mrp, ROW_NUMBER() OVER (PARTITION BY category ORDER BY mrp DESC) AS price_position FROM zepto_v2;
 
--- Rank products by MRP (highest price first)  
+-- Rank products by MRP highest price first  
 SELECT name, mrp, RANK() OVER (ORDER BY mrp DESC) AS price_rank FROM zepto_v2;
 
 -- Dense rank products by discount percentage  
@@ -73,4 +73,4 @@ SELECT category, name, weightInGms, availableQuantity, SUM(availableQuantity) OV
 SELECT category, name, availableQuantity, SUM(availableQuantity) OVER (PARTITION BY category) AS total_category_quantity FROM zepto_v2;
 
 ## Conclusion
-Working on this project helped me understand how SQL is used in real situations. I learned how to explore datasets, clean incorrect values, group information, and apply window functions to gain deeper insights. This project provided practical hands-on experience and built a strong foundation in SQL for future data analytics and database roles.
+Working on this project helped me understand how SQL is used in real situations. I learned how to explore datasets, clean incorrect values, group information, and use window functions to gain deeper insights. This project gave me practical hands on experience and built a strong base in SQL for future data analytics and database roles.
